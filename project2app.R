@@ -1261,6 +1261,18 @@ server <- function(input, output, session) {
   
   
   # ==================== ENHANCED FEATURE ENGINEERING ====================
+
+  output$feat_no_data_warning <- renderUI({
+    if (is.null(clean_df())) {
+      div(
+        class = "warning-box",
+        icon("triangle-exclamation"),
+        tags$b(" No dataset loaded. "),
+        "Please go to Upload Data and click Load / Refresh first."
+      )
+    }
+  })
+
   # Helper to compute preview feature based on current UI selections
   compute_preview_feature <- reactive({
     df <- clean_df()
